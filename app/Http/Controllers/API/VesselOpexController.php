@@ -12,8 +12,8 @@ class VesselOpexController extends Controller
     public function store(Vessel $vessel, Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'date' => 'date_format:Y-m-d',
-            'expenses' => 'numeric|between:0,99999999.99',
+            'date' => 'required|date_format:Y-m-d',
+            'expenses' => 'required|numeric|between:0,99999999.99',
         ]);
 
         if ($validator->fails()) {
@@ -21,7 +21,6 @@ class VesselOpexController extends Controller
         }
         
         try {
-            // TODO Not working due to table plural name
             $opex = $vessel->opex()->create([
                 'date' => $request->date,
                 'expenses' => $request->expenses,
