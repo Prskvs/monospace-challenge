@@ -8,3 +8,25 @@ Content-Type: application/json
     "revenues": "1500",
     "expenses": "1200"
 }
+
+###
+
+PUT http://127.0.0.1:8000/api/voyages/5 HTTP/1.1
+Content-Type: application/json
+
+{
+    "start": "2022-01-16 00:00:00",
+    "end": "2022-03-30 23:59:59",
+    "status": "pending",
+    "revenues": "1800",
+    "expenses": "1600"
+}
+
+###
+
+PUT http://127.0.0.1:8000/api/voyages/10 HTTP/1.1
+Content-Type: application/json
+
+{
+    "status": "ongoing",
+}
