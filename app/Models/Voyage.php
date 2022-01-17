@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Vessel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Voyage extends Model
 {
@@ -22,6 +23,18 @@ class Voyage extends Model
         'revenues',
         'expenses',
     ];
+
+    public $timestamps = false;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Auto calculating profit
+        static::saving(function(Model $model) {
+            $model->profit = $model->revenues - $model->expenses;
+        });
+    }
 
     public function vessel()
     {

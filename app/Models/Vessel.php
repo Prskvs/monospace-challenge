@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Voyage;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Vessel extends Model
 {
@@ -18,4 +19,11 @@ class Vessel extends Model
         'name',
         'imo_number',
     ];
+
+    public $timestamps = false;
+
+    public function voyages()
+    {
+        return $this->hasMany(Voyage::class);
+    }
 }

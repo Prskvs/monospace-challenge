@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Voyage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Vessel;
 use Illuminate\Support\Facades\Validator;
 
 class VoyageController extends Controller
@@ -20,6 +22,28 @@ class VoyageController extends Controller
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
+        }
+
+        
+
+        try {
+            $vessel = Vessel::find($request->vessel_id);
+            $voyages = $vessel->voyages()->where(['status', 'pending']);
+            $code = $vessel->name . $request->start;
+
+            $vessel->voyages()->create([
+                'status' => 'pending',
+                'start' => $request->start,
+                'end' => $request->end,
+                'code' => $code,
+                'revenues' => $request->revenues,
+                'expenses' => $request->expenses,
+            ]);
+        }
+        catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ]);
         }
 
         return response()->json([
