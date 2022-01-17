@@ -24,12 +24,9 @@ class VoyageController extends Controller
             return response()->json($validator->errors());
         }
 
-        
-
         try {
             $vessel = Vessel::find($request->vessel_id);
-            $voyages = $vessel->voyages()->where(['status', 'pending']);
-            $code = $vessel->name . $request->start;
+            $code = $vessel->name . '-' . $request->start;
 
             $vessel->voyages()->create([
                 'status' => 'pending',
