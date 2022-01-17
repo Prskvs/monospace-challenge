@@ -30,3 +30,17 @@ Content-Type: application/json
 {
     "status": "ongoing",
 }
+
+###
+
+POST http://127.0.0.1:8000/api/vessels/1/vessel-opex HTTP/1.1
+Content-Type: application/json
+
+{
+    "start": "2022-01-16",
+    "expenses": "1200"
+}
+
+###
+
+GET http://127.0.0.1:8000/api/vessels/1/financial-report HTTP/1.1

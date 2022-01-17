@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Voyage;
+use App\Models\VesselOpex;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,5 +26,10 @@ class Vessel extends Model
     public function voyages()
     {
         return $this->hasMany(Voyage::class);
+    }
+
+    public function opex()
+    {
+        return $this->hasMany(VesselOpex::class);
     }
 }
